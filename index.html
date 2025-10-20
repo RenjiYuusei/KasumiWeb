@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kasumi - Reset Giới Hạn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<style>
+:root{
+--bg-primary:#0a0e27;
+--bg-secondary:#0f1419;
+--bg-card:#1a1f2e;
+--border-primary:rgba(139,92,246,.25);
+--border-glow:rgba(139,92,246,.5);
+--text-primary:#f1f5f9;
+--text-secondary:#94a3b8;
+--text-muted:#64748b;
+--accent-primary:#8b5cf6;
+--accent-secondary:#a78bfa;
+--accent-tertiary:#c4b5fd;
+--accent-glow:rgba(139,92,246,.2);
+--success:#22c55e;
+--warning:#f59e0b;
+--danger:#ef4444;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+background:radial-gradient(ellipse at top,rgba(139,92,246,.2),transparent 60%),
+radial-gradient(ellipse at bottom right,rgba(59,130,246,.15),transparent 50%),
+linear-gradient(180deg,var(--bg-primary),var(--bg-secondary));
+background-attachment:fixed;
+color:var(--text-primary);
+font-family:'Inter',system-ui,-apple-system,sans-serif;
+min-height:100vh;
+padding:24px;
+position:relative;
+overflow-x:hidden;
+}
+#particles-js{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+pointer-events:none;
+}
+.container{max-width:920px;margin:0 auto;position:relative;z-index:1}
+.header{
+text-align:center;
+margin-bottom:56px;
+animation:fadeInDown 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.title{
+font-size:56px;
+font-weight:900;
+background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary),var(--accent-tertiary));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+margin-bottom:0;
+letter-spacing:-0.03em;
+text-shadow:0 0 80px rgba(139,92,246,.4);
+animation:titleGlow 2s ease-in-out infinite;
+}
+@keyframes titleGlow{
+0%,100%{transform:scale(1);filter:brightness(1)}
+50%{transform:scale(1.02);filter:brightness(1.1)}
+}
+.card{
+background:linear-gradient(135deg,rgba(26,31,46,.95),rgba(15,20,25,.98));
+border:1px solid var(--border-primary);
+border-radius:24px;
+padding:40px;
+box-shadow:0 20px 60px rgba(0,0,0,.5),
+0 0 0 1px rgba(139,92,246,.1),
+inset 0 1px 0 rgba(255,255,255,.03);
+margin-bottom:28px;
+animation:fadeInUp 0.8s cubic-bezier(0.16,1,0.3,1);
+position:relative;
+overflow:hidden;
+backdrop-filter:blur(20px);
+}
+.card::before{
+content:'';
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
+opacity:0;
+transition:opacity 0.4s;
+pointer-events:none;
+}
+.card:hover::before{opacity:1}
+.badge{
+display:inline-flex;
+align-items:center;
+gap:10px;
+background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(139,92,246,.08));
+border:1px solid var(--border-primary);
+padding:10px 20px;
+border-radius:999px;
+color:var(--accent-tertiary);
+font-size:14px;
+font-weight:700;
+margin-bottom:24px;
+backdrop-filter:blur(10px);
+box-shadow:0 4px 16px rgba(139,92,246,.2);
+animation:badgePulse 3s ease-in-out infinite;
+}
+@keyframes badgePulse{
+0%,100%{box-shadow:0 4px 16px rgba(139,92,246,.2)}
+50%{box-shadow:0 4px 24px rgba(139,92,246,.35)}
+}
+.badge-icon{
+width:10px;
+height:10px;
+background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));
+border-radius:50%;
+animation:pulse 2.5s ease-in-out infinite;
+box-shadow:0 0 10px var(--accent-primary);
+}
+@keyframes pulse{
+0%,100%{opacity:1;transform:scale(1)}
+50%{opacity:.6;transform:scale(1.3)}
+}
+h1{
+font-size:32px;
+font-weight:800;
+margin-bottom:16px;
+color:var(--text-primary);
+letter-spacing:-0.02em;
+}
+p{
+color:var(--text-secondary);
+line-height:1.7;
+margin-bottom:24px;
+font-size:15px;
+}
+.warning{
+background:linear-gradient(135deg,rgba(239,68,68,.12),rgba(239,68,68,.06));
+border:1px solid rgba(239,68,68,.25);
+border-left:4px solid var(--danger);
+border-radius:16px;
+padding:24px;
+margin:28px 0;
+backdrop-filter:blur(10px);
+}
+.warning-title{
+font-weight:700;
+font-size:16px;
+color:var(--danger);
+margin-bottom:14px;
+}
+.warning-content{
+color:var(--text-secondary);
+font-size:14px;
+line-height:2;
+}
+.grid{
+display:grid;
+grid-template-columns:1fr;
+gap:20px;
+margin-top:28px;
+}
+@media(min-width:768px){
+.grid{grid-template-columns:repeat(2,1fr)}
+}
+.tile{
+background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(139,92,246,.03));
+border:1px solid var(--border-primary);
+border-radius:20px;
+padding:28px;
+transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+position:relative;
+overflow:hidden;
+backdrop-filter:blur(10px);
+box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.tile::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:3px;
+background:linear-gradient(90deg,transparent,var(--accent-primary),transparent);
+transform:translateX(-100%);
+transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.tile:hover{
+transform:translateY(-6px) scale(1.02);
+box-shadow:0 16px 32px rgba(139,92,246,.3),
+0 0 20px rgba(139,92,246,.2),
+inset 0 1px 0 rgba(255,255,255,.1);
+border-color:var(--border-glow);
+background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(139,92,246,.06));
+}
+.tile:hover::before{transform:translateX(100%)}
+.tile-number{
+font-size:42px;
+font-weight:800;
+background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+margin-bottom:14px;
+line-height:1;
+}
+.tile h3{
+font-size:20px;
+font-weight:700;
+color:var(--text-primary);
+margin-bottom:10px;
+letter-spacing:-0.01em;
+}
+.tile p{
+font-size:14px;
+color:var(--text-muted);
+margin:0;
+line-height:1.6;
+}
+code{
+background:rgba(139,92,246,.15);
+border:1px solid var(--border-primary);
+padding:4px 10px;
+border-radius:8px;
+color:var(--accent-tertiary);
+font-size:13px;
+font-family:'Courier New',Consolas,monospace;
+font-weight:600;
+}
+footer{
+text-align:center;
+color:var(--text-muted);
+font-size:14px;
+margin-top:48px;
+padding:24px;
+animation:fadeIn 1.2s ease-out;
+}
+.footer-link{
+color:var(--accent-secondary);
+text-decoration:none;
+transition:color 0.3s;
+font-weight:600;
+}
+.footer-link:hover{
+color:var(--accent-primary);
+text-decoration:underline;
+}
+@keyframes fadeInDown{
+from{opacity:0;transform:translateY(-30px)}
+to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeInUp{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+<div class="container">
+<div class="header">
+<h1 class="title">Kasumi</h1>
+</div>
+
+<div class="card">
+<div class="badge">
+<span class="badge-icon"></span>
+Reset Giới Hạn
+</div>
+<h1>Vượt Link Để Reset</h1>
+<p>Bạn đã đạt giới hạn <strong>4 tài khoản/ngày</strong>. Vượt link rút gọn để nhận mã reset và tiếp tục tạo tài khoản ngay lập tức!</p>
+
+<div class="warning">
+<div class="warning-title">
+Lưu ý quan trọng
+</div>
+<div class="warning-content">
+• Mỗi lần vượt link = Reset về <strong>4 tài khoản mới</strong><br>
+• Mã có hiệu lực <strong>30 phút</strong><br>
+• Mỗi mã chỉ dùng được <strong>1 lần</strong><br>
+• Sử dụng lệnh <code>/getlink</code> trong Discord để bắt đầu
+</div>
+</div>
+
+<div class="grid">
+<div class="tile">
+<div class="tile-number">1</div>
+<h3>Nhận Link</h3>
+<p>Dùng lệnh <code>/getlink</code> trong Discord. Bot sẽ cho bạn chọn service (YeuMoney hoặc Click1s).</p>
+</div>
+<div class="tile">
+<div class="tile-number">2</div>
+<h3>Vượt Link</h3>
+<p>Mở link rút gọn, hoàn tất xác minh để được chuyển đến trang nhận mã.</p>
+</div>
+<div class="tile">
+<div class="tile-number">3</div>
+<h3>Copy Mã</h3>
+<p>Mã có dạng <code>Kasumi_xxxxx</code> sẽ tự động copy vào clipboard của bạn.</p>
+</div>
+<div class="tile">
+<div class="tile-number">4</div>
+<h3>Reset Ngay</h3>
+<p>Quay lại Discord dùng <code>/reset code:&lt;mã&gt;</code> để reset về 0/4 tài khoản.</p>
+</div>
+</div>
+</div>
+
+<footer>
+© 2025 • Made by <a href="https://discord.gg/Kasumi" target="_blank" class="footer-link">Doan Dinh Hoang</a>
+</footer>
+</div>
+<script>
+particlesJS('particles-js',{
+  particles:{
+    number:{value:100,density:{enable:true,value_area:800}},
+    color:{value:['#8b5cf6','#a78bfa','#c4b5fd']},
+    shape:{
+      type:['circle','edge','triangle'],
+      stroke:{width:0,color:'#000000'},
+      polygon:{nb_sides:5}
+    },
+    opacity:{
+      value:0.4,
+      random:true,
+      anim:{enable:true,speed:1,opacity_min:0.1,sync:false}
+    },
+    size:{
+      value:4,
+      random:true,
+      anim:{enable:true,speed:3,size_min:0.5,sync:false}
+    },
+    line_linked:{
+      enable:true,
+      distance:150,
+      color:'#8b5cf6',
+      opacity:0.25,
+      width:1.5
+    },
+    move:{
+      enable:true,
+      speed:2.5,
+      direction:'none',
+      random:true,
+      straight:false,
+      out_mode:'out',
+      bounce:false,
+      attract:{enable:true,rotateX:600,rotateY:1200}
+    }
+  },
+  interactivity:{
+    detect_on:'canvas',
+    events:{
+      onhover:{enable:true,mode:['grab','bubble']},
+      onclick:{enable:true,mode:'push'},
+      resize:true
+    },
+    modes:{
+      grab:{distance:200,line_linked:{opacity:0.6}},
+      bubble:{distance:250,size:6,duration:2,opacity:0.8,speed:3},
+      repulse:{distance:150,duration:0.4},
+      push:{particles_nb:6},
+      remove:{particles_nb:2}
+    }
+  },
+  retina_detect:true
+});
+</script>
+</body>
+</html>
