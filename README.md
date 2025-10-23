@@ -1,13 +1,16 @@
 # 🌐 Kasumi Web - Trang Reset Giới Hạn
 
-2 file HTML tĩnh để hiển thị hướng dẫn và mã reset cho hệ thống vượt link.
+Hệ thống web interface hiện đại với 2 file HTML tĩnh để hiển thị hướng dẫn và mã reset cho bot Discord.
+
+---
 
 ## 📁 Files
 
 ```
 web/
-├── index.html    # Trang chủ - Hướng dẫn vượt link
-└── verify.html   # Trang xác nhận - Hiển thị mã reset
+├── index.html    # Landing Page - Hướng dẫn vượt link (Purple theme)
+├── verify.html   # Success Page - Hiển thị mã reset (Green theme)
+└── README.md     # Tài liệu này
 ```
 
 ## 🚀 Deploy (Chọn 1 trong các cách)
@@ -68,30 +71,6 @@ Upload 2 file HTML lên bất kỳ web hosting nào hỗ trợ static files.
 
 ---
 
-## ⚙️ Cấu hình Bot
-
-Sau khi deploy, cập nhật URL trong bot:
-
-### Cách 1: Sửa file `kasumi.py`
-
-```python
-BYPASS_WEB_URL = os.getenv("BYPASS_WEB_URL", "https://your-url.com")
-```
-
-### Cách 2: Set environment variable
-
-**Windows:**
-```bash
-set BYPASS_WEB_URL=https://your-url.com
-```
-
-**Linux/Mac:**
-```bash
-export BYPASS_WEB_URL=https://your-url.com
-```
-
----
-
 ## 🔗 Cách Hoạt Động
 
 1. User dùng `/getlink` trong Discord
@@ -114,59 +93,6 @@ export BYPASS_WEB_URL=https://your-url.com
 - ✅ **Không cần database** - Tất cả xử lý ở bot
 - ✅ **Custom domain** - Có thể dùng domain riêng
 - ✅ **HTTPS tự động** - Tất cả platform đều support SSL
-
----
-
-## 🎨 Giao Diện
-
-- **Theme:** Purple gradient với animation mượt mà
-- **Icons:** Font Awesome 7.1.0 (via CDN)
-- **Particles:** Animated background với interactive effects
-  - index.html: Purple particles (100+) - grab, bubble effects
-  - verify.html: Green particles (80+) - grab, connect effects
-- **Responsive:** Hoạt động tốt trên mobile & desktop
-- **Modern:** Inter font, glass-morphism, backdrop-filter
-- **Dark mode:** Tối ưu cho đêm
-- **Effects:** 
-  - Floating logo animation
-  - Shimmer code box
-  - Pulsing badges
-  - Glow on hover
-  - Multiple particle shapes (circle, star, edge, triangle)
-  - Interactive particle modes (grab, bubble, push, connect)
-
----
-
-## 🔗 Link Shortener
-
-Bot sử dụng **Unified Shortener** với Dialog Selector:
-
-**User chọn service qua buttons:**
-- 💰 **YeuMoney:** Kiếm tiền cao hơn, ưu tiên
-- 🔗 **Click1s:** Dự phòng, ổn định
-
-**Lợi ích:**
-- User có quyền chọn service
-- Hiển thị service đã dùng trong footer
-- Không có fallback tự động
-
-**Config:**
-```bash
-# Set tokens
-set YEUMONEY_API_TOKEN=your_token
-set CLICK1S_API_TOKEN=your_token
-```
-
----
-
-## 🔧 Custom
-
-Bạn có thể tùy chỉnh:
-- Màu sắc trong `:root` CSS
-- Text content
-- Animation timing
-- Layout
-- Particles config (số lượng, màu sắc, shapes, speed)
 
 ---
 
@@ -193,14 +119,32 @@ Nếu hosting không tự động hỗ trợ clean URLs, thêm config:
 
 ---
 
-## 📞 Hỗ Trợ
+## 📞 Liên Hệ & Hỗ Trợ
 
-Nếu gặp vấn đề:
-1. Kiểm tra URL đã set đúng trong bot chưa
-2. Test URL trực tiếp: `https://your-url.com/verify?code=test`
-3. Kiểm tra console log của browser (F12)
-4. Nếu lỗi 404, thêm config clean URLs ở trên
+- 🐛 **Report bugs:** [Discord Server](https://discord.gg/Kasumi)
+- 💡 **Feature requests:** Open issue on GitHub
+- 📧 **Email:** hoangdoan.yy@gmail.com
+- 🌐 **Website:** [Kasumi Bot](https://discord.gg/Kasumi)
 
 ---
 
-**Made by [Doan Dinh Hoang](https://discord.gg/Kasumi)**
+## 📄 License
+
+MIT License - Free to use and modify
+
+---
+
+## 🌟 Credits
+
+- **Design & Development:** [Doan Dinh Hoang](https://discord.gg/Kasumi)
+- **Framework:** [Tailwind CSS](https://tailwindcss.com)
+- **Icons:** [Lucide Icons](https://lucide.dev)
+- **Particles:** [Particles.js](https://vincentgarreau.com/particles.js/)
+- **Font:** [Inter(https://fonts.google.com/specimen/Inter) by Rasmus Andersson
+
+---
+
+**Made with 💜 by [Doan Dinh Hoang](https://discord.gg/Kasumi)**  
+*Kasumi Discord Bot*
+
+**⭐ Star this repo nếu bạn thấy hữu ích!**

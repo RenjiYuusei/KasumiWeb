@@ -2,296 +2,164 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Kasumi - Mã Reset</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/fontawesome.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        'kasumi': {
+          50: '#f5f3ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6',
+          600: '#7c3aed',
+          700: '#6d28d9',
+          800: '#5b21b6',
+          900: '#4c1d95',
+        }
+      }
+    }
+  }
+}
+</script>
 <style>
-:root{
---bg-primary:#0a0e27;
---bg-secondary:#0f1419;
---bg-card:#1a1f2e;
---border-primary:rgba(139,92,246,.25);
---border-glow:rgba(139,92,246,.5);
---text-primary:#f1f5f9;
---text-secondary:#94a3b8;
---text-muted:#64748b;
---accent-primary:#8b5cf6;
---accent-secondary:#a78bfa;
---accent-tertiary:#c4b5fd;
---accent-glow:rgba(139,92,246,.2);
---success:#22c55e;
---success-glow:rgba(34,197,94,.2);
---warning:#f59e0b;
---danger:#ef4444;
+@keyframes glow {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(34, 197, 94, 0.3)); }
+  50% { filter: brightness(1.1) drop-shadow(0 0 30px rgba(34, 197, 94, 0.5)); }
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-background:radial-gradient(ellipse at top,rgba(139,92,246,.2),transparent 60%),
-radial-gradient(ellipse at bottom right,rgba(34,197,94,.15),transparent 50%),
-linear-gradient(180deg,var(--bg-primary),var(--bg-secondary));
-background-attachment:fixed;
-color:var(--text-primary);
-font-family:'Inter',system-ui,-apple-system,sans-serif;
-min-height:100vh;
-padding:24px;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-overflow-x:hidden;
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-#particles-js{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:0;
-pointer-events:none;
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
-.container{max-width:740px;width:100%;position:relative;z-index:1}
-.card{
-background:var(--bg-card);
-border:1px solid var(--border-primary);
-border-radius:24px;
-padding:48px;
-box-shadow:0 20px 60px rgba(0,0,0,.5),
-0 0 0 1px rgba(139,92,246,.1),
-inset 0 1px 0 rgba(255,255,255,.03);
-animation:fadeInUp 0.8s cubic-bezier(0.16,1,0.3,1);
-position:relative;
-overflow:hidden;
+@keyframes successPulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3); }
+  50% { box-shadow: 0 4px 24px rgba(34, 197, 94, 0.5); }
 }
-.card::before{
-content:'';
-position:absolute;
-top:-50%;
-left:-50%;
-width:200%;
-height:200%;
-background:radial-gradient(circle,var(--success-glow) 0%,transparent 70%);
-opacity:0.6;
-pointer-events:none;
+.animate-glow { animation: glow 2s ease-in-out infinite; }
+.animate-fadeInUp { animation: fadeInUp 0.8s ease-out; }
+.animate-shimmer::before { animation: shimmer 2.5s infinite; }
+.animate-successPulse { animation: successPulse 2s ease-in-out infinite; }
+#particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+/* Touch-friendly improvements */
+@media (max-width: 640px) {
+  * { -webkit-tap-highlight-color: rgba(34, 197, 94, 0.3); }
+  button { min-height: 48px; }
 }
-.card-content{position:relative;z-index:1}
-.success-badge{
-display:inline-flex;
-align-items:center;
-gap:10px;
-background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(34,197,94,.08));
-border:1px solid rgba(34,197,94,.3);
-padding:10px 24px;
-border-radius:999px;
-color:var(--success);
-font-size:14px;
-font-weight:700;
-margin-bottom:20px;
-backdrop-filter:blur(10px);
-box-shadow:0 4px 16px rgba(34,197,94,.3);
-animation:successPulse 2s ease-in-out infinite;
-}
-@keyframes successPulse{
-0%,100%{box-shadow:0 4px 16px rgba(34,197,94,.3)}
-50%{box-shadow:0 4px 24px rgba(34,197,94,.5)}
-}
-h1{
-font-size:32px;
-font-weight:800;
-margin-bottom:20px;
-text-align:center;
-color:var(--text-primary);
-letter-spacing:-0.02em;
-}
-p{
-color:var(--text-secondary);
-line-height:1.7;
-margin-bottom:28px;
-text-align:center;
-font-size:15px;
-}
-.code-box{
-background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(139,92,246,.06));
-border:2px dashed var(--accent-primary);
-border-radius:20px;
-padding:28px;
-margin:28px 0;
-position:relative;
-overflow:hidden;
-}
-.code-box::before{
-content:'';
-position:absolute;
-top:0;
-left:0;
-right:0;
-bottom:0;
-background:linear-gradient(45deg,transparent 30%,rgba(139,92,246,.08) 50%,transparent 70%);
-animation:shimmer 2.5s infinite;
-}
-@keyframes shimmer{
-0%{transform:translateX(-100%)}
-100%{transform:translateX(100%)}
-}
-.code-label{
-font-size:12px;
-text-transform:uppercase;
-letter-spacing:2px;
-color:var(--text-muted);
-margin-bottom:14px;
-text-align:center;
-font-weight:700;
-}
-.code{
-font-family:'Courier New',Consolas,monospace;
-font-size:26px;
-font-weight:800;
-color:var(--accent-primary);
-word-break:break-all;
-text-align:center;
-padding:20px;
-background:rgba(139,92,246,.08);
-border-radius:14px;
-position:relative;
-z-index:1;
-letter-spacing:0.5px;
-}
-.row{
-display:flex;
-gap:14px;
-flex-wrap:wrap;
-margin-top:24px;
-justify-content:center;
-}
-.btn{
-cursor:pointer;
-appearance:none;
-border:0;
-border-radius:14px;
-padding:16px 28px;
-font-weight:700;
-font-size:15px;
-transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
-display:inline-flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-flex:1;
-min-width:180px;
-max-width:250px;
-}
-.btn-primary{
-background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));
-color:#fff;
-box-shadow:0 6px 16px rgba(139,92,246,.35);
-}
-.btn-primary:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 24px rgba(139,92,246,.45);
-}
-.btn-primary:active{
-transform:translateY(-1px);
-}
-.btn-secondary{
-background:rgba(139,92,246,.12);
-color:var(--accent-tertiary);
-border:1px solid var(--border-primary);
-}
-.btn-secondary:hover{
-background:rgba(139,92,246,.18);
-border-color:var(--border-glow);
-transform:translateY(-2px);
-}
-.hint{
-margin-top:14px;
-color:var(--text-muted);
-font-size:14px;
-text-align:center;
-}
-.ok{color:var(--success);font-weight:600}
-.warn{color:var(--warning);font-weight:600}
-.err{color:var(--danger);font-weight:600}
-.instruction{
-background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.06));
-border:1px solid rgba(34,197,94,.25);
-border-left:4px solid var(--success);
-border-radius:16px;
-padding:24px;
-margin-top:28px;
-backdrop-filter:blur(10px);
-}
-.instruction h3{
-margin:0 0 14px;
-color:var(--success);
-font-size:18px;
-font-weight:800;
-}
-.instruction-list{
-color:var(--text-secondary);
-font-size:14px;
-line-height:2;
-margin:0;
-}
-@keyframes fadeInUp{
-from{opacity:0;transform:translateY(30px)}
-to{opacity:1;transform:translateY(0)}
-}
-/* Responsive cho điện thoại */
-@media(max-width:640px){
-body{padding:16px}
-.card{padding:28px;border-radius:20px}
-.success-badge{padding:8px 16px;font-size:13px;margin-bottom:16px}
-h1{font-size:26px;margin-bottom:16px}
-p{font-size:14px;margin-bottom:20px}
-.code-box{padding:20px;border-radius:16px}
-.code-label{font-size:12px;margin-bottom:10px}
-.code{font-size:18px;padding:12px 16px}
-.row{flex-direction:column;gap:10px}
-.btn{padding:14px 24px;font-size:14px}
-.instruction{padding:20px;margin-top:20px}
-.instruction h3{font-size:16px;margin-bottom:10px}
-.instruction-list{font-size:13px;line-height:1.8}
-.hint{font-size:13px;margin-top:12px}
-code{padding:3px 8px;font-size:12px}
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+  body { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
 }
 </style>
 </head>
-<body>
+<body class="min-h-screen bg-gradient-to-br from-slate-950 via-green-950 to-slate-950 text-slate-100 font-sans overflow-x-hidden flex items-center justify-center p-3 sm:p-4 md:p-6 touch-manipulation">
 <div id="particles-js"></div>
-<div class="container">
-<div class="card">
-<div class="card-content">
-<h1>Hoàn Tất Xác Minh!</h1>
-<div class="success-badge">
-Kasumi Reset Code
-</div>
-<p>Chúc mừng! Bạn đã vượt link thành công. Đây là mã reset giới hạn của bạn:</p>
-<div class="code-box">
-<div class="code-label">Mã Reset Của Bạn</div>
-<div id="code" class="code">Đang tải...</div>
-</div>
-<div class="row">
-<button id="copyBtn" class="btn btn-primary">Sao chép mã</button>
-<button id="copyCmdBtn" class="btn btn-secondary">Copy lệnh /reset</button>
-</div>
-<div class="instruction">
-<h3>Cách sử dụng</h3>
-<div class="instruction-list">
-1. Sao chép mã ở trên (đã auto copy)<br>
-2. Quay lại Discord<br>
-3. Nhập lệnh: <code>/reset code:&lt;mã&gt;</code><br>
-4. Giới hạn reset về <strong>0/3</strong> - Tạo <strong>3 tài khoản mới</strong>!
-</div>
-</div>
-<p class="hint" id="status"></p>
-<p class="hint">Mã có hiệu lực <strong>30 phút</strong> và chỉ dùng được <strong>1 lần</strong></p>
-</div>
-</div>
+
+<!-- Container -->
+<div class="relative z-10 w-full max-w-3xl animate-fadeInUp mx-auto">
+  
+  <!-- Main Card -->
+  <div class="backdrop-blur-xl bg-gradient-to-br from-slate-900/80 to-slate-800/60 rounded-2xl sm:rounded-3xl border border-green-500/20 shadow-2xl shadow-green-500/10 p-5 sm:p-8 md:p-12 relative overflow-hidden">
+    
+    <!-- Success Glow Effect -->
+    <div class="absolute top-0 left-0 w-full h-full bg-gradient-radial from-green-500/10 to-transparent opacity-60 pointer-events-none"></div>
+    
+    <!-- Content -->
+    <div class="relative z-10">
+      
+      <!-- Header -->
+      <div class="text-center mb-6 sm:mb-8">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-100 mb-4 tracking-tight px-2">
+          Hoàn Tất Xác Minh!
+        </h1>
+        <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-green-500/20 to-green-600/10 border border-green-400/30 rounded-full backdrop-blur-sm animate-successPulse">
+          <i data-lucide="check-circle-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-400"></i>
+          <span class="text-xs sm:text-sm font-bold text-green-300 uppercase tracking-wider">Kasumi Reset Code</span>
+        </div>
+        <p class="text-slate-300 mt-4 sm:mt-6 leading-relaxed text-xs sm:text-sm md:text-base px-2">
+          Chúc mừng! Bạn đã vượt link thành công. Đây là mã reset giới hạn của bạn:
+        </p>
+      </div>
+
+      <!-- Code Box -->
+      <div class="relative bg-gradient-to-br from-purple-500/10 to-purple-600/5 border-2 border-dashed border-purple-400 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 my-6 sm:my-8 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent animate-shimmer"></div>
+        <div class="relative z-10">
+          <div class="text-xs uppercase tracking-widest text-slate-400 text-center mb-3 sm:mb-4 font-bold">Mã Reset Của Bạn</div>
+          <div id="code" class="font-mono text-lg sm:text-2xl md:text-3xl font-black text-purple-400 text-center p-3 sm:p-4 md:p-6 bg-purple-500/10 rounded-lg sm:rounded-xl break-all select-all">
+            Đang tải...
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center mb-6 sm:mb-8">
+        <button id="copyBtn" class="group flex items-center justify-center gap-2 px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-bold rounded-xl shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:-translate-y-1 transition-all duration-300 text-sm sm:text-base min-h-[48px] active:scale-95">
+          <i data-lucide="clipboard-copy" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          <span>Sao chép mã</span>
+        </button>
+        <button id="copyCmdBtn" class="group flex items-center justify-center gap-2 px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 font-bold rounded-xl border border-purple-400/30 hover:border-purple-400/50 hover:-translate-y-1 transition-all duration-300 text-sm sm:text-base min-h-[48px] active:scale-95">
+          <i data-lucide="terminal" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          <span>Copy lệnh /reset</span>
+        </button>
+      </div>
+
+      <!-- Instructions -->
+      <div class="bg-gradient-to-r from-green-500/10 to-green-600/5 border-l-4 border-green-500 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 backdrop-blur-sm mb-6">
+        <div class="flex items-start gap-2 sm:gap-3">
+          <i data-lucide="lightbulb" class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
+          <div>
+            <h3 class="text-sm sm:text-base md:text-lg font-bold text-green-400 mb-2 sm:mb-3">Cách sử dụng</h3>
+            <ul class="space-y-2 text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 font-bold flex-shrink-0 min-w-[1.5rem]">1.</span>
+                <span>Sao chép mã ở trên (đã auto copy)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 font-bold flex-shrink-0 min-w-[1.5rem]">2.</span>
+                <span>Quay lại Discord</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 font-bold flex-shrink-0 min-w-[1.5rem]">3.</span>
+                <span>Nhập lệnh: <code class="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-400/30 rounded text-xs font-mono text-purple-300">/reset code:&lt;mã&gt;</code></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 font-bold flex-shrink-0 min-w-[1.5rem]">4.</span>
+                <span>Giới hạn reset về <strong class="text-green-300">0/3</strong> - Tạo <strong class="text-green-300">3 tài khoản mới</strong>!</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status & Hints -->
+      <div class="text-center space-y-2 px-2">
+        <p id="status" class="text-xs sm:text-sm md:text-base font-semibold"></p>
+        <p class="text-slate-400 text-xs sm:text-sm flex items-center justify-center gap-2 flex-wrap">
+          <i data-lucide="clock" class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0"></i>
+          <span>Mã có hiệu lực <strong class="text-purple-300">30 phút</strong> và chỉ dùng được <strong class="text-purple-300">1 lần</strong></span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 <script>
 const qs = new URLSearchParams(location.search);
@@ -304,12 +172,17 @@ if(code){
 } else {
     codeEl.textContent = 'Không tìm thấy mã';
     statusEl.textContent = '❌ Thiếu tham số code. Hãy chạy lại /getlink trong Discord.';
-    statusEl.className = 'hint err';
+    statusEl.className = 'text-sm sm:text-base font-semibold text-red-400';
 }
 
-function showStatus(msg, cls){
+function showStatus(msg, type){
     statusEl.textContent = msg;
-    statusEl.className = 'hint ' + (cls||'');
+    const colors = {
+        ok: 'text-green-400',
+        warn: 'text-yellow-400',
+        err: 'text-red-400'
+    };
+    statusEl.className = 'text-sm sm:text-base font-semibold ' + (colors[type] || 'text-slate-400');
 }
 
 async function copy(text){
@@ -331,14 +204,6 @@ if(copyCmdBtn) copyCmdBtn.addEventListener('click', async ()=>{
     const ok = await copy(cmd);
     showStatus(ok ? '✅ Đã sao chép lệnh /reset' : '❌ Không thể sao chép', ok ? 'ok' : 'err');
 });
-
-// Tự động sao chép mã khi tải trang
-(async ()=>{
-    if(code){
-        const ok = await copy(code);
-        if(ok) showStatus('✅ Đã tự động sao chép mã. Hãy dán vào Discord với /reset', 'ok');
-    }
-})();
 </script>
 <script>
 particlesJS('particles-js',{
@@ -395,6 +260,10 @@ particlesJS('particles-js',{
   },
   retina_detect:true
 });
+</script>
+<script>
+// Initialize Lucide icons
+lucide.createIcons();
 </script>
 </body>
 </html>
