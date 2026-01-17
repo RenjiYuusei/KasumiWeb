@@ -1,150 +1,40 @@
-# 🌐 Kasumi Web - Trang Reset Giới Hạn
+# Kasumi - Reset Giới Hạn
 
-Hệ thống web interface hiện đại với 2 file HTML tĩnh để hiển thị hướng dẫn và mã reset cho bot Discord.
+Giao diện web hiện đại cho hệ thống reset giới hạn của Kasumi bot, được xây dựng bằng React và Vite.
 
----
+## Tính năng
 
-## 📁 Files
+- **Giao diện hiện đại:** Sử dụng Glassmorphism, hiệu ứng particles, và màu sắc theo chủ đề Kasumi.
+- **Tương tác mượt mà:** Animations với Framer Motion.
+- **Xác minh tự động:** Tự động lấy mã code từ URL (`/verify?code=...`) và copy vào clipboard.
 
-```
-web/
-├── index.html    # Landing Page - Hướng dẫn vượt link (Purple theme)
-├── verify.html   # Success Page - Hiển thị mã reset (Green theme)
-└── README.md     # Tài liệu này
-```
+## Cài đặt và Chạy Development
 
-## 🚀 Deploy (Chọn 1 trong các cách)
+1.  Cài đặt dependencies:
+    ```bash
+    npm install
+    ```
 
-### 1️⃣ GitHub Pages (Miễn phí - Khuyến nghị)
+2.  Chạy server development:
+    ```bash
+    npm run dev
+    ```
 
-**Bước 1:** Tạo repository mới trên GitHub
+## Build cho Production
 
-**Bước 2:** Upload 2 file vào repository:
-```bash
-git init
-git add index.html verify.html
-git commit -m "Add Kasumi web pages"
-git branch -M main
-git remote add origin https://github.com/username/kasumi-web.git
-git push -u origin main
-```
+Dự án này là một Single Page Application (SPA). Để deploy lên server (như Nginx, Vercel, Netlify):
 
-**Bước 3:** Vào Settings → Pages → Source: **main branch** → Save
+1.  Build dự án:
+    ```bash
+    npm run build
+    ```
+    Kết quả sẽ nằm trong thư mục `dist/`.
 
-**Bước 4:** URL sẽ là: `https://username.github.io/kasumi-web/`
+2.  Deploy thư mục `dist/` lên web server của bạn.
+    *Lưu ý:* Cấu hình web server để rewrite tất cả các request về `index.html` để React Router hoạt động chính xác (SPA fallback).
 
----
+## Cấu trúc thư mục
 
-### 2️⃣ Vercel (Miễn phí)
-
-**Bước 1:** Vào [vercel.com](https://vercel.com) và đăng nhập
-
-**Bước 2:** Click "New Project" → Upload 2 file HTML
-
-**Bước 3:** Deploy → Nhận URL: `https://your-project.vercel.app/`
-
----
-
-### 3️⃣ Netlify (Miễn phí)
-
-**Bước 1:** Vào [netlify.com](https://netlify.com) và đăng nhập
-
-**Bước 2:** Drag & drop thư mục `web/` vào Netlify
-
-**Bước 3:** Deploy → Nhận URL: `https://your-site.netlify.app/`
-
----
-
-### 4️⃣ Cloudflare Pages (Miễn phí)
-
-**Bước 1:** Vào [pages.cloudflare.com](https://pages.cloudflare.com)
-
-**Bước 2:** Create project → Upload 2 file
-
-**Bước 3:** Deploy → Nhận URL: `https://your-project.pages.dev/`
-
----
-
-### 5️⃣ Bất kỳ Web Hosting nào
-
-Upload 2 file HTML lên bất kỳ web hosting nào hỗ trợ static files.
-
----
-
-## 🔗 Cách Hoạt Động
-
-1. User dùng `/getlink` trong Discord
-2. Bot hiển thị dialog cho user chọn service (YeuMoney hoặc Click1s)
-3. Bot tạo mã `Kasumi_xxxxx`
-4. Bot tạo URL: `https://your-url.com/verify?code=Kasumi_xxxxx` (clean URL)
-5. Bot rút gọn URL qua service đã chọn
-6. User vượt link rút gọn → Redirect về `verify`
-7. Trang `verify` hiển thị mã và auto copy
-8. User dùng `/reset` trong Discord để reset giới hạn
-
-**Lưu ý:** URL sử dụng clean URLs (không có `.html`). Hầu hết hosting platforms (Vercel, Netlify, Cloudflare Pages, GitHub Pages) đều tự động hỗ trợ clean URLs.
-
----
-
-## 📝 Lưu Ý
-
-- ✅ **Chỉ cần 2 file HTML** - Không cần backend
-- ✅ **Deploy miễn phí** - GitHub Pages, Vercel, Netlify đều free
-- ✅ **Không cần database** - Tất cả xử lý ở bot
-- ✅ **Custom domain** - Có thể dùng domain riêng
-- ✅ **HTTPS tự động** - Tất cả platform đều support SSL
-
----
-
-## 🔧 Clean URLs Config (Optional)
-
-Nếu hosting không tự động hỗ trợ clean URLs, thêm config:
-
-**Vercel** - Tạo `vercel.json`:
-```json
-{
-  "cleanUrls": true
-}
-```
-
-**Netlify** - Tạo `netlify.toml`:
-```toml
-[[redirects]]
-  from = "/*"
-  to = "/:splat.html"
-  status = 200
-```
-
-**GitHub Pages** - Tự động hỗ trợ, không cần config!
-
----
-
-## 📞 Liên Hệ & Hỗ Trợ
-
-- 🐛 **Report bugs:** [Discord Server](https://discord.gg/Kasumi)
-- 💡 **Feature requests:** Open issue on GitHub
-- 📧 **Email:** hoangdoan.yy@gmail.com
-- 🌐 **Website:** [Kasumi Bot](https://discord.gg/Kasumi)
-
----
-
-## 📄 License
-
-MIT License - Free to use and modify
-
----
-
-## 🌟 Credits
-
-- **Design & Development:** [Doan Dinh Hoang](https://discord.gg/Kasumi)
-- **Framework:** [Tailwind CSS](https://tailwindcss.com)
-- **Icons:** [Lucide Icons](https://lucide.dev)
-- **Particles:** [Particles.js](https://vincentgarreau.com/particles.js/)
-- **Font:** [Inter(https://fonts.google.com/specimen/Inter) by Rasmus Andersson
-
----
-
-**Made with 💜 by [Doan Dinh Hoang](https://discord.gg/Kasumi)**  
-*Kasumi Discord Bot*
-
-**⭐ Star this repo nếu bạn thấy hữu ích!**
+- `src/components`: Các component tái sử dụng (Card, Background, etc.).
+- `src/pages`: Các trang chính (Home, Verify).
+- `src/constants`: Cấu hình màu sắc, particles.
