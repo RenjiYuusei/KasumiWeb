@@ -1,0 +1,10 @@
+# Kasumi Web robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://kasumi.dev/sitemap.xml
