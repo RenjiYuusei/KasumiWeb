@@ -48,8 +48,6 @@ export async function POST(request: NextRequest) {
     // 2. Store in database
     // 3. Log the subscription
 
-    console.log(`[Kasumi] New subscriber: ${email}, Code: ${code}`);
-
     return NextResponse.json(
       {
         success: true,

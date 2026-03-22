@@ -42,8 +42,6 @@ export async function POST(request: NextRequest) {
     const resetCommand = generateResetCommand();
     verifiedCodes.add(code);
 
-    console.log(`[Kasumi] Code verified: ${code}, Reset: ${resetCommand}`);
-
     return NextResponse.json(
       {
         success: true,
