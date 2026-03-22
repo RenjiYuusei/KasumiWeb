@@ -1,150 +1,223 @@
-# 🌐 Kasumi Web - Trang Reset Giới Hạn
+# Kasumi Web
 
-Hệ thống web interface hiện đại với 2 file HTML tĩnh để hiển thị hướng dẫn và mã reset cho bot Discord.
+A modern, sleek waitlist application built with Next.js 16, React 19, and TypeScript. Features animated particle backgrounds, email subscriptions, and code verification.
 
----
+## Features
 
-## 📁 Files
+- **Modern Stack**: Next.js 16, React 19, TypeScript, Tailwind CSS
+- **Animated UI**: Particle background effects with purple and green themes
+- **Responsive Design**: Mobile-first approach, works seamlessly on all devices
+- **Email Subscriptions**: Waitlist management with verification codes
+- **API Routes**: Serverless functions for subscriptions and code verification
+- **Type Safe**: Full TypeScript support for better developer experience
+- **Performance Optimized**: Static generation, tree-shaking, optimized bundling
+- **Beautiful Design**: Custom Kasumi color palette with smooth animations
 
-```
-web/
-├── index.html    # Landing Page - Hướng dẫn vượt link (Purple theme)
-├── verify.html   # Success Page - Hiển thị mã reset (Green theme)
-└── README.md     # Tài liệu này
-```
+## Quick Start
 
-## 🚀 Deploy (Chọn 1 trong các cách)
+### Prerequisites
+- Node.js 18 or later
+- npm, pnpm, yarn, or bun
 
-### 1️⃣ GitHub Pages (Miễn phí - Khuyến nghị)
+### Installation
 
-**Bước 1:** Tạo repository mới trên GitHub
-
-**Bước 2:** Upload 2 file vào repository:
 ```bash
-git init
-git add index.html verify.html
-git commit -m "Add Kasumi web pages"
-git branch -M main
-git remote add origin https://github.com/username/kasumi-web.git
-git push -u origin main
+# Clone the repository
+git clone https://github.com/RenjiYuusei/KasumiWeb.git
+cd KasumiWeb
+
+# Install dependencies
+npm install
+# or
+pnpm install
+# or
+yarn install
+
+# Set up environment variables
+cp .env.example .env.local
+
+# Run development server
+npm run dev
 ```
 
-**Bước 3:** Vào Settings → Pages → Source: **main branch** → Save
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-**Bước 4:** URL sẽ là: `https://username.github.io/kasumi-web/`
+## Project Structure
 
----
+```
+├── app/                          # Next.js App Router
+│   ├── api/                      # API routes
+│   │   ├── subscribe/route.ts    # Email subscription
+│   │   └── verify/route.ts       # Code verification
+│   ├── verify/                   # Verification page
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Home page
+├── components/                   # Reusable components
+│   ├── ParticlesBackground.tsx   # Particle animation
+│   ├── CopyButton.tsx            # Copy button
+│   ├── LandingPageContent.tsx    # Landing page
+│   └── VerifyPageContent.tsx     # Verify page
+├── lib/                          # Utilities
+│   ├── particles.ts              # Particle engine
+│   └── utils.ts                  # Helper functions
+├── public/                       # Static assets
+├── tailwind.config.ts            # Tailwind configuration
+└── next.config.js                # Next.js configuration
+```
 
-### 2️⃣ Vercel (Miễn phí)
+## Available Scripts
 
-**Bước 1:** Vào [vercel.com](https://vercel.com) và đăng nhập
+### Development
+```bash
+npm run dev
+```
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000).
 
-**Bước 2:** Click "New Project" → Upload 2 file HTML
+### Build
+```bash
+npm run build
+```
+Builds the app for production to the `.next` folder.
 
-**Bước 3:** Deploy → Nhận URL: `https://your-project.vercel.app/`
+### Production
+```bash
+npm run start
+```
+Runs the built app in production mode.
 
----
+### Linting
+```bash
+npm run lint
+```
+Checks code quality with ESLint.
 
-### 3️⃣ Netlify (Miễn phí)
+## API Endpoints
 
-**Bước 1:** Vào [netlify.com](https://netlify.com) và đăng nhập
+### POST /api/subscribe
+Subscribe to the waitlist.
 
-**Bước 2:** Drag & drop thư mục `web/` vào Netlify
-
-**Bước 3:** Deploy → Nhận URL: `https://your-site.netlify.app/`
-
----
-
-### 4️⃣ Cloudflare Pages (Miễn phí)
-
-**Bước 1:** Vào [pages.cloudflare.com](https://pages.cloudflare.com)
-
-**Bước 2:** Create project → Upload 2 file
-
-**Bước 3:** Deploy → Nhận URL: `https://your-project.pages.dev/`
-
----
-
-### 5️⃣ Bất kỳ Web Hosting nào
-
-Upload 2 file HTML lên bất kỳ web hosting nào hỗ trợ static files.
-
----
-
-## 🔗 Cách Hoạt Động
-
-1. User dùng `/getlink` trong Discord
-2. Bot hiển thị dialog cho user chọn service (YeuMoney hoặc Click1s)
-3. Bot tạo mã `Kasumi_xxxxx`
-4. Bot tạo URL: `https://your-url.com/verify?code=Kasumi_xxxxx` (clean URL)
-5. Bot rút gọn URL qua service đã chọn
-6. User vượt link rút gọn → Redirect về `verify`
-7. Trang `verify` hiển thị mã và auto copy
-8. User dùng `/reset` trong Discord để reset giới hạn
-
-**Lưu ý:** URL sử dụng clean URLs (không có `.html`). Hầu hết hosting platforms (Vercel, Netlify, Cloudflare Pages, GitHub Pages) đều tự động hỗ trợ clean URLs.
-
----
-
-## 📝 Lưu Ý
-
-- ✅ **Chỉ cần 2 file HTML** - Không cần backend
-- ✅ **Deploy miễn phí** - GitHub Pages, Vercel, Netlify đều free
-- ✅ **Không cần database** - Tất cả xử lý ở bot
-- ✅ **Custom domain** - Có thể dùng domain riêng
-- ✅ **HTTPS tự động** - Tất cả platform đều support SSL
-
----
-
-## 🔧 Clean URLs Config (Optional)
-
-Nếu hosting không tự động hỗ trợ clean URLs, thêm config:
-
-**Vercel** - Tạo `vercel.json`:
+**Request:**
 ```json
 {
-  "cleanUrls": true
+  "email": "user@example.com"
 }
 ```
 
-**Netlify** - Tạo `netlify.toml`:
-```toml
-[[redirects]]
-  from = "/*"
-  to = "/:splat.html"
-  status = 200
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Subscription successful. Check your email for verification.",
+  "code": "verification_code"
+}
 ```
 
-**GitHub Pages** - Tự động hỗ trợ, không cần config!
+### POST /api/verify
+Verify a subscription code.
+
+**Request:**
+```json
+{
+  "code": "verification_code"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Code verified successfully",
+  "resetCommand": "ABCD1234EFGH5678"
+}
+```
+
+## Design System
+
+### Color Palette
+- **Primary**: `#8b5cf6` (Purple)
+- **Primary Light**: `#a78bfa`
+- **Accent**: `#00d9ff` (Cyan)
+- **Accent Dark**: `#00b3d9`
+- **Success**: `#10b981` (Green)
+- **Background**: `#0a0014` (Dark)
+- **Surface**: `#150025` (Dark Purple)
+- **Border**: `#2d004d`
+
+### Animations
+- **Glow**: Text glowing effect
+- **FadeIn**: Element fade-in animation
+- **Shimmer**: Shimmer effect for elements
+- **SuccessPulse**: Success feedback animation
+- **SlideInUp**: Slide up animation
+- **SlideInDown**: Slide down animation
+
+## Deployment
+
+### Vercel (Recommended)
+```bash
+vercel deploy
+```
+
+### Docker
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## Environment Variables
+
+Create a `.env.local` file based on `.env.example`:
+
+```env
+NEXT_PUBLIC_APP_NAME=Kasumi
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+# Add other environment variables as needed
+```
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## Migration Notes
+
+This project was migrated from static HTML to Next.js 16. See [MIGRATION.md](./MIGRATION.md) for detailed information about the migration process.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support, email support@kasumi.dev or open an issue on GitHub.
+
+## Changelog
+
+### Version 0.1.0 (Current)
+- Initial Next.js migration
+- Implemented API routes for subscriptions
+- Added particle animation backgrounds
+- Created responsive design
+- Added TypeScript support
 
 ---
 
-## 📞 Liên Hệ & Hỗ Trợ
-
-- 🐛 **Report bugs:** [Discord Server](https://discord.gg/Kasumi)
-- 💡 **Feature requests:** Open issue on GitHub
-- 📧 **Email:** hoangdoan.yy@gmail.com
-- 🌐 **Website:** [Kasumi Bot](https://discord.gg/Kasumi)
-
----
-
-## 📄 License
-
-MIT License - Free to use and modify
-
----
-
-## 🌟 Credits
-
-- **Design & Development:** [Doan Dinh Hoang](https://discord.gg/Kasumi)
-- **Framework:** [Tailwind CSS](https://tailwindcss.com)
-- **Icons:** [Lucide Icons](https://lucide.dev)
-- **Particles:** [Particles.js](https://vincentgarreau.com/particles.js/)
-- **Font:** [Inter(https://fonts.google.com/specimen/Inter) by Rasmus Andersson
-
----
-
-**Made with 💜 by [Doan Dinh Hoang](https://discord.gg/Kasumi)**  
-*Kasumi Discord Bot*
-
-**⭐ Star this repo nếu bạn thấy hữu ích!**
+**Built with Next.js**

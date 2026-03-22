@@ -1,0 +1,22 @@
+{
+  "projectSettings": {
+    "sourceFilesOutsideRootDirectory": false
+  },
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": [
+    {
+      "key": "NEXT_PUBLIC_APP_NAME",
+      "value": "Kasumi",
+      "type": "plaintext"
+    },
+    {
+      "key": "NEXT_PUBLIC_APP_URL",
+      "value": "@VERCEL_URL",
+      "type": "system"
+    }
+  ]
+}
